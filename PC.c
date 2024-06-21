@@ -216,10 +216,6 @@ void receive_msg(struct robot *A){
 			NULL, 60, true,
 			"Student71", "jaich4Ya",
 			NULL, NULL);
-
-    	
-
-
 			if(rc){
 				printf("Error: %s\n", mosquitto_strerror(rc));
 				mosquitto_lib_cleanup();
@@ -229,31 +225,20 @@ void receive_msg(struct robot *A){
 
                 transmit_msg('B', A->x, A->y);
             }
-
-        
 	mosquitto_message_free(&msg);
 }
 
 
 int main(int argc, char *argv[]){
 	struct robot robot_A;
-
 	mosquitto_lib_init();
-
-       
-
 	while (1){
         receive_msg(&robot_A);
 
         printf("A pos = %d %d", robot_A.x, robot_A.y);
 		mark(robot_A.x,robot_A.y, 3);
 		print_map();
-	}	
-	
-
-	
+	}		
 	mosquitto_lib_cleanup();
-
 	return 0;
-
 }
